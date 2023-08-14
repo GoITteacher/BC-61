@@ -1,6 +1,7 @@
 # APIS
 
 ## LIST api:
+
 - [Pokemon](https://pokeapi.co/)
 - [Pokemon Example](https://pokeapi.co/api/v2/pokemon?offset=30&limit=10)
 - [Radio](https://rapidapi.com/herihermwn/api/50k-radio-stations/)
@@ -10,3 +11,20 @@
 - [Work API 3](https://rapidapi.com/arbeitnow/api/arbeitnow-free-job-board/)
 - [Pixaby](https://pixabay.com/api/docs/)
 - [WORK API 4](https://documenter.getpostman.com/view/18545278/UVJbJdKh)
+
+---
+
+```js
+<li class="card news-card">
+  <div class="news-image">
+    <img src="${urlToImage}" alt="${title}" />
+  </div>
+
+  <h3 class="card-title">${title}</h3>
+  <p class="card-desc">${description}</p>
+  <div class="card-footer">
+    <span>${author}</span>
+    <span>${publishedAt}</span>
+  </div>
+</li>
+```

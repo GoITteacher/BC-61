@@ -1,4 +1,4 @@
-card news-card news-image .card {
+.card {
   background: #f2f2f2;
   overflow: hidden;
   border-radius: 20px;

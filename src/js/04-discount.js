@@ -15,6 +15,16 @@
  * «Оформляем заказ на сумму [сумма] со скидкой [скидка]%»
  */
 
-let totalSpent = 2000;
+let totalSpent = 3000;
 let payment = 500;
 let discount = 0;
+
+if (totalSpent > 5000) {
+  discount = 10;
+} else if (totalSpent > 1000) {
+  discount = 5;
+} else if (totalSpent > 100) {
+  discount = 2;
+}
+
+console.log(`Оформляем заказ на сумму ${payment} со скидкой ${discount}%`);

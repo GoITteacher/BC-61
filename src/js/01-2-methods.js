@@ -14,19 +14,22 @@ const playlist = {
   rating: 5,
   tracks: ['трек-1', 'трек-2', 'трек-3'],
   changeName(newName) {
-    console.log('this внутри changeName: ', this);
+    this.name = newName;
   },
+
   addTrack(track) {
     this.tracks.push(track);
   },
-  updateRating(newRating) {
-    this.rating = newRating;
-  },
+
   getTrackCount() {
     return this.tracks.length;
   },
+
+  updateRating(newRating) {
+    this.rating = newRating;
+  },
 };
-/* 
+
 console.log(playlist.getTrackCount());
 
 playlist.changeName('Новое имя');
@@ -40,4 +43,3 @@ console.log(playlist.getTrackCount());
 playlist.updateRating(4);
 
 console.log(playlist);
- */

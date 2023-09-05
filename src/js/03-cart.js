@@ -16,40 +16,56 @@
 
 const cart = {
   items: [],
+
   getItems() {
     return this.items;
   },
-  add(product) {
-    this.items.push(product);
+
+  add(newItem) {
+    this.items.push(newItem);
   },
-  remove(productName) {
+
+  remove(name) {
     for (let i = 0; i < this.items.length; i++) {
-      if (this.items[i].name === productName) {
+      if (this.items[i].name === name) {
         this.items.splice(i, 1);
         break;
       }
     }
   },
+
   clear() {
     this.items = [];
   },
+
   getTotalPrice() {
-    let totalPrice = 0;
-
-    for (let item of this.items) {
-      totalPrice += item.price;
+    let total = 0;
+    for (const item of this.items) {
+      total += item.price * item.amount;
     }
-
-    return totalPrice;
+    return total;
   },
-  increaseQuantity(productName) {},
-  decreaseQuantity(productName) {},
+
+  increaseQuantity(productName) {
+    for (const item of this.items) {
+      if (item.name === productName) {
+        item.amount += 1;
+      }
+    }
+  },
+  decreaseQuantity(productName) {
+    for (const item of this.items) {
+      if (item.name === productName && item.amount > 1) {
+        item.amount -= 1;
+      }
+    }
+  },
 };
 
-cart.add({ name: '🍎', price: 50 });
-cart.add({ name: '🍋', price: 60 });
-cart.add({ name: '🍋', price: 60 });
-cart.add({ name: '🍓', price: 110 });
+cart.add({ name: '🍎', price: 50, amount: 3 });
+cart.add({ name: '🍋', price: 60, amount: 2 });
+cart.add({ name: '🍓', price: 110, amount: 20 });
 
+cart.remove('1');
 console.log(cart.getItems());
-console.log(cart.getTotalPrice());
+// console.log(cart.getTotalPrice());

@@ -8,15 +8,35 @@ let feed = {
   neutral: 10,
 };
 
-let feedback = Object.create(feed);
-feedback.test = 'myTest';
+// console.log(feed.hasOwnProperty('good1'));
+/* 
+[
+  ['bad', 3],
+  ['good', 5],
+  ['neutral', 10]
+]
+*/
 
-// for (let key of Object.keys(feedback)) {
-//   console.log(feedback[key]);
+// let feedback = Object.create(feed);
+// feedback.test = 'myTest';
+// for (const key in feedback) {
+//   if (feedback.hasOwnProperty(key)) console.log(key);
+// }
+// console.log(feedback);
+// let totalFeedback = 0;
+
+// ========================
+
+const result1 = Object.values(feed); // [3, 5, 10]
+const result2 = Object.keys(feed); // ['bad', 'good', 'neutral']
+const result3 = Object.entries(feed);
+
+// for (const key of Object.keys(feed)) {
+//   console.log(key, feed[key]);
 // }
 
-// for (let key in feedback) {
-//   if (feedback.hasOwnProperty(key)) console.log(feedback[key]);
+// for (const entries of Object.entries(feed)) {
+//   const key = entries[0];
+//   const value = entries[1];
+//   console.log(key, value);
 // }
-
-let totalFeedback = 0;

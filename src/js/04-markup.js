@@ -111,6 +111,29 @@ const cars = [
   }
 */
 
-for (let { make, model, price } of cars) {
-  console.log(`${make} - ${model} - ${price}`);
-}
+// for (let { make, model, price } of cars) {
+//   console.log(`${make} - ${model} - ${price}`);
+// }
+
+// =============
+
+// function foo(data) {
+//   const completed = false;
+//   const category = '123';
+//   const priority = '123';
+
+//   const result = {
+//     category,
+//     priority,
+//     ...data,
+//   };
+
+//   console.log(result);
+//   return result;
+// }
+
+// foo({
+//   text: '123123',
+//   category: 'Hello',
+//   priority: 'saefsef',
+// });

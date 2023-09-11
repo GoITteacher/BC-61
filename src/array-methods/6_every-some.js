@@ -8,7 +8,13 @@
  - Перебирання масиву припиняється, якщо колбек повертає false.
 */
 
-let array = [-1, -6, -1, -6, -1, -6, -1, -6, 1];
+// let array = [2, 4, 6, 8, 4, 1, 64, 24, 88];
+
+// const result = array.every((el, index, array) => {
+//   return el % 2 === 0;
+// });
+
+// console.log(result);
 
 /*
     SOME
@@ -18,3 +24,62 @@ let array = [-1, -6, -1, -6, -1, -6, -1, -6, 1];
  - Повертає false, якщо жоден елемент масиву не задовольняє умову.
  - Перебирання масиву припиняється, якщо колбек повертає true.
 */
+
+// let array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+// const result = array.some((el, idx) => {
+//   return el > 10 && el % 2 === 1;
+// });
+
+// console.log(result);
+
+let users = [
+  {
+    name: '1',
+    age: 12,
+    phone: '+28099448',
+  },
+  {
+    name: '2',
+    age: 20,
+    phone: '+28099854185',
+  },
+  {
+    name: '3',
+    age: 31,
+    phone: '+280996161',
+  },
+  {
+    name: '4',
+    age: 12,
+    phone: '+28099448',
+  },
+  {
+    name: '5',
+    age: 45,
+    phone: '+28099854185',
+  },
+  {
+    name: '6',
+    age: 24,
+    phone: '+280996161',
+  },
+  {
+    name: '7',
+    age: 42,
+    phone: '+28099448',
+  },
+  {
+    name: '8',
+    age: 21,
+    phone: '+28099854185',
+  },
+  {
+    name: '9',
+    age: 53,
+    phone: '+280996161',
+  },
+];
+
+// users.every((user,idx)=>{
+//     return el === 0 ;
+// })

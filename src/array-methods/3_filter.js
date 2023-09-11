@@ -10,4 +10,10 @@
 
 */
 
-let array = [1, 3, 56, 1, 5, 78, 2, 6];
+let array = [0, 5, 1, 2, 4, 1, 3, 7, 7, 85, 2, 58, 12];
+
+const result = array.filter((el, idx, arr) => {
+  return el > 10 || el < 5;
+});
+
+console.log(result);

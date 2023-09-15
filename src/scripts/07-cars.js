@@ -1,6 +1,6 @@
 let myBtn = document.querySelector('#testButton');
 let list = document.querySelector('.collection-item');
-
+const carListElem = document.querySelector('.js-list');
 const cars = [
   {
     make: 'Honda',
@@ -83,3 +83,37 @@ const cars = [
     onSale: false,
   },
 ];
+
+// const markup = cars
+//   .filter(car => car.onSale)
+//   .map(car => {
+//     return `<tr>
+//   <td>${car.make}</td>
+//   <td>${car.model}</td>
+//   <td>${car.type}</td>
+//   <td>${car.amount}</td>
+//   <td>${car.price}</td>
+//   <td>${car.onSale}</td>
+// </tr>`;
+//   })
+//   .join('\n');
+
+// list.lastElementChild.insertAdjacentHTML('beforeend', markup);
+
+// =============================
+
+const markup = cars
+  .map(car => {
+    return `<li class="box">
+  <h3>${car.make} - ${car.model}</h3>
+  <p>Type: ${car.type}</p>
+  <p>amount: ${car.amount}</p>
+  <p>price: ${car.price}$</p>
+  <p>Total Price: ${car.amount * car.price}$</p>
+</li>`;
+  })
+  .join('\n');
+
+console.log(markup);
+
+carListElem.insertAdjacentHTML('beforeend', markup);

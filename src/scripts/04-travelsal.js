@@ -1,8 +1,10 @@
 let myBtn = document.querySelector('#testButton');
-let list = document.querySelector('ul');
-let liItem1 = list.querySelector('li.active');
-let liItem2 = list.querySelector(':scope > li.active');
+// let list = document.querySelector('ul');
+// let liItem1 = list.querySelector('li.active');
+// let liItem2 = list.querySelector(':scope > li.active');
 
+const liItem = document.querySelector('li.active');
+console.log(liItem);
 /* 
 elem.parentNode - вибере батьківський elem.
 elem.childNodes - псевдомасив, зберігає всі дочірні елементи, включно з текстовими.
@@ -16,3 +18,18 @@ elem.previousElementSibling - вибере вузол-елемент «злів�
 elem.nextSibling - вибере елемент «праворуч» від elem (його наступного сусіда)
 elem.nextElementSibling - вибере вузол-елемент «праворуч» від elem (його наступного сусіда).
 */
+
+const bodyElem = liItem.parentNode.parentNode;
+const bodyChildren = [...bodyElem.children];
+
+console.log(bodyElem.firstChild);
+console.log(bodyElem.firstElementChild);
+
+console.log(bodyElem.lastChild);
+console.log(bodyElem.lastElementChild);
+
+console.log(liItem.previousSibling);
+console.log(liItem.previousElementSibling);
+
+console.log(liItem.nextSibling);
+console.log(liItem.nextElementSibling);

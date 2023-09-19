@@ -1,5 +1,5 @@
 let colorPalette = [];
-const LENGTH = 5;
+const LENGTH = 6;
 
 function createPaletteItems() {
   const items = [];
@@ -32,8 +32,6 @@ function hexToRgb(hex) {
   let blue = parseInt(hex.substring(5, 7), 16);
   return `${red}, ${green}, ${blue}`;
 }
-
-createPaletteItems();
 ////////////////////////////////////////////////////////////////////////////
 
 const refs = {
@@ -43,17 +41,52 @@ const refs = {
   backdropElem: document.querySelector('.js-backdrop'),
 };
 
+refs.btnReloadColor.addEventListener('click', () => {
+  createPaletteItems();
+  renderColors();
+});
+
+refs.itemList.addEventListener('click', e => {
+  if (e.target.nodeName !== 'BUTTON') return;
+  refs.modalElement.style.backgroundColor = e.target.style.backgroundColor;
+  showModal();
+});
+
+refs.backdropElem.addEventListener('click', e => {
+  if (e.target !== e.currentTarget) return;
+  hideModal();
+});
+
 ////////////////////////////////////////////////////////////////////////////
 
-/* 
-nodeName
-<li class="color-item">
-    <button class="color-body style="background-color:...;"></button>
-    <div class="color-footer">
-        <div>HEX: ....</div>
-        <div>RGB: ....</div>
-        <div></div>
-    </div>
-</li>
+function renderColors() {
+  const markup = colorPalette.map(colorTemplate).join('');
+  refs.itemList.innerHTML = markup;
+}
 
-*/
+function colorTemplate(colorObj) {
+  return `<li class="color-item">
+<button class="color-body" style="background-color:${colorObj.hex};"></button>
+<div class="color-footer">
+    <div>HEX: ${colorObj.hex}</div>
+    <div>RGB: ${colorObj.rgb}</div>
+</div>
+</li>`;
+}
+
+function showModal() {
+  document.body.classList.add('show-modal');
+  document.addEventListener('keydown', onEscapeModal);
+}
+
+function hideModal() {
+  document.body.classList.remove('show-modal');
+  document.removeEventListener('keydown', onEscapeModal);
+}
+
+function onEscapeModal(e) {
+  console.log(e.code);
+  if (e.code === 'Escape') {
+    hideModal();
+  }
+}

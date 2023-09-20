@@ -124,3 +124,20 @@ img {
 .submit:active {
   background-color: #06b;
 }
+
+.blur {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  transition: all 400ms;
+  border: 5px solid red;
+  transform: rotateZ(40deg);
+  scale: 0.5;
+}
+
+.blur.lazyloaded {
+  -webkit-filter: none;
+  filter: none;
+  border: none;
+  transform: rotateZ(0deg);
+  scale: 1;
+}

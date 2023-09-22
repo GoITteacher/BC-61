@@ -4,9 +4,8 @@
   "description": "",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /js-example/",
-    "test1": "echo HELLO WORLD",
-    "push": "git add .; git commit -m 'update'; git push;"
+    "test": "echo tesh",
+    "build": "parcel build src/*.html --public-url /js-example/"
   },
   "repository": {
     "type": "git",
@@ -19,6 +18,9 @@
   },
   "homepage": "https://github.com/GoITteacher/js-example#readme",
   "dependencies": {
-    "parcel": "^2.9.3"
+    "lodash": "^4.17.21",
+    "lodash.throttle": "^4.1.1",
+    "parcel": "^2.9.3",
+    "simplelightbox": "^2.14.2"
   }
 }

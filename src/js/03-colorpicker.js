@@ -6,6 +6,17 @@ const refs = {
 
 refs.colorListEl.addEventListener('click', onColorClick);
 
+function onColorClick(e) {
+  if (!e.target.classList.contains('color-swatch')) return;
+  const color = e.target.dataset.hex;
+  document.body.style.backgroundColor = color;
+  localStorage.setItem('currentColor', color);
+
+  const oldElem = refs.colorListEl.querySelector('.is-active'); // null
+  oldElem?.classList.remove('is-active');
+  e.target.parentNode.classList.add('is-active');
+}
+
 renderPalette(colors);
 
 // ==========================================
@@ -28,3 +39,12 @@ function renderPalette(colors) {
   const markup = colorsTemplate(colors);
   refs.colorListEl.innerHTML = markup;
 }
+
+// ========================
+
+function onLoadPage() {
+  const color = localStorage.getItem('currentColor');
+  document.body.style.backgroundColor = color;
+}
+
+onLoadPage();

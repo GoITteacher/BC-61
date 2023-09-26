@@ -1,5 +1,3 @@
-import '../css/common.css';
-
 /*
  - Создание
  - Unix-время

@@ -1,5 +1,3 @@
-import '../css/common.css';
-
 /*
  * Метод window.setTimeout(callback, delay, args)
  */

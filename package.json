@@ -5,7 +5,8 @@
   "scripts": {
     "start": "parcel src/*.html",
     "build": "parcel build src/*.html --public-url /js-example/",
-    "push": "git add . && git commit -m 'update'"
+    "push": "git add . && git commit -m 'update'",
+    "server": "json-server --watch db.json"
   },
   "repository": {
     "type": "git",
@@ -24,13 +25,10 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.4.0",
-    "@parcel/transformer-sass": "^2.6.0",
+    "buffer": "^6.0.3",
     "parcel": "^2.6.0",
-    "parcel-plugin-handlebars-precompile": "^1.0.2",
-    "parcel-plugin-nuke-dist": "^1.0.1",
     "parcel-reporter-clean-dist": "^1.0.4",
-    "parcel-transformer-hbs": "^1.0.4",
-    "posthtml-include": "^1.7.4"
-  },
-  "type": "module"
+    "posthtml-include": "^1.7.4",
+    "process": "^0.11.10"
+  }
 }

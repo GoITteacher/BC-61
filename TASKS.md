@@ -1,6 +1,5 @@
 # Library
 
-
 ```js
 const user = {
     id: Number,

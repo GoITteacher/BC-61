@@ -1,92 +1,126 @@
-import { UsersAPI } from './modules/usersAPI';
+import { UserAPI } from './modules/usersAPI';
 
 const refs = {
-  userListElem: document.querySelector('.js-user-list'),
-  createUserForm: document.querySelector('.js-create-form'),
-  updateUserForm: document.querySelector('.js-update-form'),
-  resetUserForm: document.querySelector('.js-reset-form'),
-  deleteUserForm: document.querySelector('.js-delete-form'),
+  createFormEl: document.querySelector('.js-create-form'),
+  updateFormEl: document.querySelector('.js-update-form'),
+  resetFormEl: document.querySelector('.js-reset-form'),
+  deleteFormEl: document.querySelector('.js-delete-form'),
+  userListEl: document.querySelector('.js-user-list'),
 };
-// ============================================================
 
-refs.createUserForm.addEventListener('submit', onUserCreate);
-refs.updateUserForm.addEventListener('submit', onUserUpdate);
-refs.resetUserForm.addEventListener('submit', onUserReset);
-// refs.deleteUserForm.addEventListener('submit', onUserDelete);
+const userApi = new UserAPI();
+//
+//
+//
+// ================== CALLBACK LISTENERS ==================
 
-function onUserCreate(e) {
+refs.createFormEl.addEventListener('submit', onCreateUser);
+refs.updateFormEl.addEventListener('submit', onUpdateUser);
+refs.resetFormEl.addEventListener('submit', onResetUser);
+refs.deleteFormEl.addEventListener('submit', onDeleteUser);
+
+function onCreateUser(e) {
   e.preventDefault();
-  const form = e.target;
-  const { elements } = form;
+  const { userName, userPhone, userEmail } = e.target.elements;
 
   const user = {
-    name: elements.userName.value,
-    phone: elements.userPhone.value,
-    email: elements.userEmail.value,
-    avatar: 'test',
+    name: userName.value,
+    phone: userPhone.value,
+    email: userEmail.value,
+    avatar: 'https://source.unsplash.com/500x500/?random=1&avatar,user,man',
   };
 
-  UsersAPI.createUser(user).then(createdUser => {
-    const markup = userTemplate(createdUser);
-    refs.userListElem.insertAdjacentHTML('beforeend', markup);
+  userApi.createUser(user).then(newUser => {
+    const markup = userTemplate(newUser);
+    refs.userListEl.insertAdjacentHTML('beforeend', markup);
   });
 
-  form.reset();
+  e.target.reset();
 }
-
-function onUserUpdate(e) {
+function onUpdateUser(e) {
   e.preventDefault();
 
   const user = {};
   const formData = new FormData(e.target);
+
   formData.forEach((value, key) => {
+    key = key.slice(4).toLowerCase();
+
     if (value) {
-      key = key.replace('user', '').toLowerCase();
       user[key] = value;
     }
   });
 
-  UsersAPI.updateUser(user).then(updatedUser => {
+  userApi.updateUser(user).then(updatedUser => {
     const markup = userTemplate(updatedUser);
-    const oldUser = refs.userListElem.querySelector(`li[data-id="${user.id}"]`);
-    oldUser.insertAdjacentHTML('afterend', markup);
-    oldUser.remove();
+    const oldElem = refs.userListEl.querySelector(`[data-id="${user.id}"]`);
+    oldElem.insertAdjacentHTML('afterend', markup);
+    oldElem.remove();
   });
+
+  e.target.reset();
 }
-function onUserReset(e) {
+function onResetUser(e) {
   e.preventDefault();
 
   const user = {};
   const formData = new FormData(e.target);
+
   formData.forEach((value, key) => {
-    key = key.replace('user', '').toLowerCase();
+    key = key.slice(4).toLowerCase();
     user[key] = value;
   });
 
-  UsersAPI.resetUser(user).then(updatedUser => {
+  userApi.resetUser(user).then(updatedUser => {
     const markup = userTemplate(updatedUser);
-    const oldUser = refs.userListElem.querySelector(`li[data-id="${user.id}"]`);
-    oldUser.insertAdjacentHTML('afterend', markup);
-    oldUser.remove();
+    const oldElem = refs.userListEl.querySelector(`[data-id="${user.id}"]`);
+    oldElem.insertAdjacentHTML('afterend', markup);
+    oldElem.remove();
   });
+
+  e.target.reset();
 }
-function onUserDelete(e) {}
+function onDeleteUser(e) {
+  e.preventDefault();
+  const id = e.target.userId.value;
+  userApi.deleteUser(id).then(() => {
+    refs.userListEl.querySelector(`[data-id="${id}"]`).remove();
+  });
+  e.target.reset();
+}
+//
+//
+//
+//
+// ================== RENDER FUNCTIONS =================
 
-// ============================================================
-
-UsersAPI.getUsers().then(renderUsers);
-
-function userTemplate({ name, email, phone, avatar, id }) {
-  const url = `https://source.unsplash.com/500x500/?random=${id}&avatar,user,man`;
-
-  return `<li class="card user-item" data-id=${id}>
-  <img src="${url}" alt="#" class="user-avatar" />
+function userTemplate({ name, phone, email, avatar, id }) {
+  return `
+  <li class="card user-item" data-id=${id}>
+  <img src="${avatar}" alt="#" class="user-avatar" />
   <h3>${name}</h3>
   <p>${email}</p>
   <p>${phone}</p>
-</li>`;
+</li>
+  `;
 }
-function renderUsers(userList) {
-  const markup = userList.map(userTemplate).join('');
-  refs.userListElem.innerHTML = markup;
+function userListTemplate(users) {
+  return users.map(userTemplate).join('');
 }
+function renderUserList(users) {
+  const markup = userListTemplate(users);
+  refs.userListEl.innerHTML = markup;
+}
+//
+//
+//
+//
+// ============== PAGE LOAD ================
+function onPageLoad() {
+  userApi.getUsers().then(users => {
+    renderUserList(users);
+  });
+}
+onPageLoad();
+
+// ==============

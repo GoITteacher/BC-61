@@ -5,6 +5,7 @@ const refs = {
   articleListEl: document.querySelector('.js-article-list'),
   loadMoreBtnEl: document.querySelector('.js-btn-load'),
 };
+
 const newsApi = new NewsApi();
 
 refs.formEl.addEventListener('submit', onFormSubmit);

@@ -1,36 +1,31 @@
-import axios from 'axios';
-import { faker } from '@faker-js/faker';
-faker.seed(0);
-faker.locale = 'ru';
-const baseURL = 'http://localhost:4040';
+import axios2 from 'axios';
 
-const axiosV2 = axios.create({
-  baseURL: `${baseURL}/books`,
+const axios = axios2.create({
+  baseURL: 'http://localhost:3000/books',
+  headers: { test: 'hello', myKey: 'KUKU-KEY' },
+  params: {
+    key: '213132434234234',
+  },
 });
 
-export class BooksAPI {
-  constructor(page, limit) {
-    this._page = page;
-    this._limit = limit;
+export class BooksApi {
+  getBooks() {
+    return axios.get().then(res => res.data);
   }
 
-  getBooks() {}
+  createBook(book) {
+    return axios.post('', book).then(res => res.data);
+  }
 
-  getLimitBooks() {}
+  updateBook({ id, ...book }) {
+    return axios.patch(`/${id}`, book);
+  }
 
-  createBook(book) {}
+  resetBook({ id, ...book }) {
+    return axios.put(`/${id}`, book).then(res => res.data);
+  }
 
-  replaceBook(book, id) {}
-
-  updateBook(book, id) {}
-
-  deleteBook(id) {}
-
-  static getRandomBook() {
-    return {
-      author: faker.name.firstName(),
-      desc: faker.lorem.paragraph(),
-      title: faker.word.preposition(),
-    };
+  deleteBook(id) {
+    return axios.delete(`/${id}`);
   }
 }

@@ -5,15 +5,16 @@ const refs = {
 
 refs.formEl.addEventListener('submit', onFormSubmit);
 
-function onFormSubmit(event) {
+async function onFormSubmit(event) {
   event.preventDefault();
   const count = +event.target.elements.query.value;
 
-  getQuotes(count)
-    .then(data => {
-      renderQuotes(data);
-    })
-    .catch(err => {});
+  try {
+    const data = await getQuotes(count);
+    renderQuotes(data);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function renderQuotes(arr) {
@@ -39,7 +40,7 @@ function getQuotes(count) {
   return Promise.all(promises);
 }
 
-function getQuote() {
+async function getQuote() {
   const url = 'https://quotes15.p.rapidapi.com/quotes/random/';
   const options = {
     headers: {
@@ -48,7 +49,8 @@ function getQuote() {
     },
   };
 
-  return fetch(url, options).then(res => res.json());
+  const res = await fetch(url, options);
+  return res.json();
 }
 
 function getPromise(timeout) {

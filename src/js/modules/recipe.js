@@ -25,17 +25,16 @@ function onPizzaClick(evt) {
   }
 }
 
-function onFormSubmit(evt) {
+async function onFormSubmit(evt) {
   evt.preventDefault();
   const query = evt.target.elements.name.value;
-  searchRecipe(query).then(recipe => {
-    console.log(recipe);
-    recipe = recipe.hits.map(el => {
-      return el.recipe;
-    });
-    dataFood = recipe;
-    renderPizza(recipe);
+  const recipe = await searchRecipe(query);
+  console.log(recipe);
+  recipe = recipe.hits.map(el => {
+    return el.recipe;
   });
+  dataFood = recipe;
+  renderPizza(recipe);
 }
 function renderPizza(array) {
   const markup = array
@@ -113,7 +112,7 @@ renderLikeList();
 
 refs.ulLocalStor.addEventListener('click', onPizzaClick);
 
-function searchRecipe(q) {
+async function searchRecipe(q) {
   const BASE_URL = 'https://edamam-recipe-search.p.rapidapi.com/api/recipes/v2';
   const END_POINT = '?';
   const PARAMS = new URLSearchParams({ q, type: 'public' });
@@ -124,5 +123,6 @@ function searchRecipe(q) {
       'X-RapidAPI-Host': 'edamam-recipe-search.p.rapidapi.com',
     },
   };
-  return fetch(url, options).then(res => res.json());
+  const res = await fetch(url, options);
+  return res.json();
 }

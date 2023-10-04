@@ -3,15 +3,14 @@ const refs = {
   cardInfo: document.querySelector('.js-ip-form'),
 };
 
-refs.formEl.addEventListener('submit', event => {
+refs.formEl.addEventListener('submit', async event => {
   event.preventDefault();
   const IP = refs.formEl.elements.query.value;
-  getIp(IP).then(data => {
-    renderIp(data);
-  });
+  const data = await getIp(IP);
+  renderIp(data);
 });
 
-function getIp(ip) {
+async function getIp(ip) {
   const baseUrl = 'https://ip-geolocation-ipwhois-io.p.rapidapi.com/json/';
   const PARAMS = new URLSearchParams({ ip });
   const url = `${baseUrl}?${PARAMS}`;
@@ -22,7 +21,8 @@ function getIp(ip) {
     },
   };
 
-  return fetch(url, options).then(response => response.json());
+  const response = await fetch(url, options);
+  return response.json();
 }
 
 function renderIp({

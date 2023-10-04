@@ -5,15 +5,14 @@ const refs = {
 
 refs.heroFormEl.addEventListener('submit', onFormSubmit);
 
-function onFormSubmit(e) {
+async function onFormSubmit(e) {
   e.preventDefault();
   const hero = e.target.elements.query.value;
-  searchHero(hero).then(data => {
-    renderHero(data);
-  });
+  const data = await searchHero(hero);
+  renderHero(data);
 }
 
-function searchHero(name) {
+async function searchHero(name) {
   const BASE_URL = 'https://superhero-search.p.rapidapi.com';
   const END_POINT = '/api/';
   const PARAMS = `?hero=${name}`;
@@ -26,7 +25,8 @@ function searchHero(name) {
     },
   };
 
-  return fetch(url, options).then(res => res.json());
+  const res = await fetch(url, options);
+  return res.json();
 }
 
 function renderHero({ name, biography: { fullName }, images: { lg } }) {

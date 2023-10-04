@@ -4,17 +4,17 @@ const refs = {
 };
 
 refs.formEl.addEventListener('submit', onFormElSubmit);
-function onFormElSubmit(event) {
+async function onFormElSubmit(event) {
   event.preventDefault();
   const value = refs.formEl.elements.query.value;
-  getPokemon(value).then(renderPokemon);
+  const pokemon = await getPokemon(value);
+  renderPokemon(pokemon);
 }
 
-function getPokemon(value) {
+async function getPokemon(value) {
   const url = `https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`;
-  return fetch(url).then(res => {
-    return res.json();
-  });
+  const res = await fetch(url);
+  return res.json();
 }
 
 function renderPokemon({

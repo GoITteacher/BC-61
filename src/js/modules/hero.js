@@ -25,8 +25,15 @@ async function searchHero(name) {
     },
   };
 
-  const res = await fetch(url, options);
-  return res.json();
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) {
+      throw new Error(res.status);
+    }
+    return res.json();
+  } catch {
+    console.log(err.message);
+  }
 }
 
 function renderHero({ name, biography: { fullName }, images: { lg } }) {

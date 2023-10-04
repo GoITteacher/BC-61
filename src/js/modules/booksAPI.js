@@ -9,8 +9,9 @@ const axios = axios2.create({
 });
 
 export class BooksApi {
-  getBooks() {
-    return axios.get().then(res => res.data);
+  async getBooks() {
+    const res = await axios.get();
+    return res.data;
   }
 
   createBook(book) {

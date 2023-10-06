@@ -81,3 +81,5 @@
 - [Як розгорнути проєкт](https://docs.google.com/document/d/1LI_vT8sOOuFC8I1LMZxhaQ0kFHtnC6bsCujhheEmf3E/edit)
 - [Критерії приймання проєкту](https://docs.google.com/document/d/13GKky-k-pcfEhhFWO4SjyitzPBat258rJEkfj6mivjc/edit)
 - [Презентація та шаблон](https://docs.google.com/document/d/1cboEr4YJlNMf7ZXdGUqnUIuCSa5jrDTDxbK2vdfOv9o/edit)
+
+---

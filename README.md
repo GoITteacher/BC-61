@@ -3,7 +3,7 @@
 ## Repo
 
 - Create repository by template
-  [PARCEL](https://github.com/goitacademy/parcel-project-template)
+  [PARCEL](https://github.com/GoITteacher/parcel-project-template)
 - Invite Collaborators (Settings->Collaborators->AddPeople)
 - Create branch dev
 - Change Settings
